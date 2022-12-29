@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Search Product";
+}
+@model SearchViewModel
+
+
+<div class="text-center">
+    <h1 class="display-4">Ürün Arama</h1>
+    <div class="input-group rounded">
+        <form asp-controller="search" asp-action="index" method="get">
+            <input name="query" type="search" id="query" class="text-input" placeholder="Ürün arama bölümü" aria-label="Search" aria-describedby="search-addon" value="@Model.Query" />
+            <button type="submit">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+</div>
+<div class="products">
+    @{
+        if (Model.Products.Count == 0)
+        {
+            <p class="none-product-title">Aradığınız Kriterlerde Ürün Bulunamadı :(</p>
+        }
+        else
+        {
+            foreach (var item in Model.Products)
+            {
+                <div class="card">
+                    <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">@item.Title</p>
+                    </div>
+                </div>
+            }
+        }
+
+    }
+</div>
